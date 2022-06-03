@@ -1,27 +1,20 @@
 #include <stdio.h>
-#include <ctype.h>
 /**
- * main - return the required output
+ * main - print out the results from the function
  *
- * Description: print a to z in upper and lower
+ *Description: use to print alphabet from a to z
  *
- * Return: return integer value 0
+ *Return: return integer value o
  *
  */
 int main(void)
 {
-	char alphabet;
+	int alphabet;
 
-	for (alphabet = 'A'; alphabet <= 'Z'; alphabet++)
-	{
-		putchar(tolower(alphabet));
-	}
-	for (alphabet = 'A'; alphabet <= 'Z'; alphabet++)
+	for (alphabet = 'a'; alphabet <= 'z'; alphabet++)
 	{
 		putchar(alphabet);
 	}
-
 	putchar('\n');
 	return (0);
-
 }
