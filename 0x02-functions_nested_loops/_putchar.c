@@ -1,23 +1,13 @@
 #include <unistd.h>
+
 /**
- * main - help to print out chatacters
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
  *
- * Description: print out the required results
- *
- * Return: Always return 0
- *
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
  */
-char _putchar(char c)
+int _putchar(char c)
 {
 	return (write(1, &c, 1));
-}
-
-void print_alphabet(void)
-{
-	char i = 'a';
-	while (i <= 'z')
-	{
-		_putchar(i);
-		i++;
-	}
 }
