@@ -1,1 +1,1 @@
-A directory to store task on More pointers, arrays and strings
+A directory to store task on More pointers, arrays and strings in C
