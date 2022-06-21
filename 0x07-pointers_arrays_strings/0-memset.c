@@ -1,23 +1,19 @@
 #include "main.h"
+
 /**
- * _memset - fills the memory of the array with n bytes
- * @s: first argument
- * @b: second argument
- * @n: third argument
- *
- * Description: return the rquired result
- *
- * Return: return a char pointer
+ * _memset - fills memory with a constant byte,
+ * @s: memory area.
+ * @b: constant byte.
+ * @n: bytes filled.
+ * Return: the pointer to dest.
  */
+
 char *_memset(char *s, char b, unsigned int n)
 {
-	int i;
+	unsigned int i;
 
 	for (i = 0; i < n; i++)
-	{
-		s[i] = b;
-	}
-	s[i] = '\0';
+		*(s + i) =  b;
 
-	return (0);
+	return (s);
 }
