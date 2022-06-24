@@ -1,1 +1,1 @@
-a directory to solve task on C - Static libraries
+a directory to solve task on C - Static libraries.
