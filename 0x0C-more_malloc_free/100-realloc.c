@@ -1,67 +1,42 @@
-#include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include "main.h"
 
 /**
- * _realloc - a function that reallocates a memory block using malloc and free
- * @ptr: pointer to the memory previously allocated
- * @old_size: size of the memory space to allocate in bytes
- * @new_size: size in bytes
- * Return: void pointer
+ * *_realloc - reallocates a memory block using malloc and free
+ * @ptr: pointer to the memory previsouly allocated by malloc
+ * @old_size: size of previously allocated memory for ptr
+ * @new_size: size of the new memory block to be allocated
+ * Return: pointer to the newly allocated memory block
  */
-
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	void *newptr;
+	char *new_ptr;
+	char *old_ptr;
+	unsigned int i;
 
-	if (ptr == NULL)
-	{
-		newptr = malloc(new_size);
-		if (newptr == NULL)
-		{
-			free(ptr);
-			return (NULL);
-		}
-		free(ptr);
-		return (newptr);
-	}
 	if (new_size == old_size)
 		return (ptr);
-	if (new_size == 0 && ptr != NULL)
+	if (new_size == 0 && ptr)
 	{
 		free(ptr);
 		return (NULL);
 	}
-	newptr = malloc(new_size);
-	if (newptr == NULL)
-	{
-		free(ptr);
+	if (ptr == NULL)
+		return (malloc(new_size));
+	new_ptr = malloc(new_size); /*Reserve new memory using malloc*/
+	if (new_ptr == NULL) /*Verify that malloc did not fail*/
 		return (NULL);
+	old_ptr = ptr; /*Cast malloc pointer to char type by reassignment*/
+	if (new_size < old_size) /*Bytes from previous buffer to new buffer*/
+	{
+		for (i = 0; i < new_size; i++)
+			new_ptr[i] = old_ptr[i];
 	}
 	if (new_size > old_size)
-		_memcpy(newptr, ptr, old_size);
-	free(ptr);
-	return (newptr);
-}
-
-/**
- * _memcpy - function that copies memory area
- * @dest: dest positions
- * @src: source position
- * @n: size of bytes
- * Return: memory address of function (memory area)
- */
-
-char *_memcpy(char *dest, char *src, unsigned int n)
-{
-	unsigned int a = 0;
-	unsigned int b = 0;
-
-	while (a < n)
 	{
-		*(dest + a) = *(src + a);
-		a += 1;
-		b += 1;
+		for (i = 0; i < old_size; i++)
+			new_ptr[i] = old_ptr[i];
 	}
-	return (dest);
+	free(ptr);
+	return (new_ptr);
 }
