@@ -1,49 +1,71 @@
-#include <stdlib.h>
 #include "dog.h"
+#include <stdlib.h>
+#include <stdio.h>
+
 /**
- * new_dog - pointer to a new allocated memory
- * @name: pointer to the name of the dog
- * @age: age of the dog
- * @owner: owner of the dog
- *
- * Description: return a pointer to a new memory allocated
- *
- * Return: return dog_t pointer
+ * new_dog - creates a new dog
+ * @name: name of dog
+ * @age: age of dog
+ * @owner: owner of dog
+ * Return: newdog (dog_t *)
  */
+
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	size_t len_name, len_owner, i, size;
-	dog_t *ptr;
 
-	ptr = malloc(sizeof(dog_t));
-	ptr = (dog_t *)malloc(sizeof(dog_t));
-	if (ptr == NULL)
-		return (NULL);
-	len_name = len_owner = 0;
-	while (name[len_name++] != '\0')
-		;
-	while (owner[len_owner++] != '\0')
-		;
-	ptr->name = malloc(len_name * sizeof(ptr->name));
-	if (ptr->name == NULL)
+	int i = 0, j = 0, k;
+	dog_t *ndog; /*Creates an instance of dog_t*/
+
+	/*Get length of string name*/
+	while (name[i] != '\0')
+		i++;
+
+	/*Get length of string owner*/
+	while (owner[j] != '\0')
+		j++;
+
+	/*Reserve memory for dog_t instance*/
+	ndog = malloc(sizeof(dog_t));
+
+	/*Verify malloc didn't fail*/
+	if (ndog == NULL)
 	{
-		free(ptr);
+		free(ndog);
 		return (NULL);
 	}
-	size = i = 0;
-	while (size++ < len_name)
-		ptr->name[size] = name[size];
-	ptr->name[size] = '\0';
-	ptr->age = age;
-	ptr->owner = malloc(len_owner * sizeof(ptr->owner));
-	if (ptr->owner == NULL)
+
+	/*Reserve memory for member, name*/
+	ndog->name = malloc(i * sizeof(ndog->name));
+
+	/*Verify malloc didn't fail*/
+	if (ndog->name == NULL)
 	{
-		free(ptr->name);
-		free(ptr);
+		free(ndog->name);
+		free(ndog);
 		return (NULL);
 	}
-	while (i++ < len_owner)
-		ptr->owner[i] = owner[i];
-	ptr->owner[i] = '\0';
-	return (ptr);
+
+	/*Assign name*/
+	for (k = 0; k <= i; k++)
+		ndog->name[k] = name[k];
+
+	/*Assign age*/
+	ndog->age = age;
+
+	/*Reserve memory for member, owner*/
+	ndog->owner = malloc(j * sizeof(ndog->owner));
+
+	/*Verify malloc didn't fail*/
+	if (ndog->owner == NULL)
+	{
+		free(ndog->owner);
+		free(ndog->name);
+		free(ndog);
+		return (NULL);
+	}
+
+	/*Assign owner*/
+	for (k = 0; k <= j; k++)
+		ndog->owner[k] = owner[k];
+	return (ndog);
 }
